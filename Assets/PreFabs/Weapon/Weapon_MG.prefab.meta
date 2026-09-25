@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: c595d86fe14d1c847ab0eefc0a61ca79
+labels:
+- TopDown
+- TopDownShooter
+- Shooter
+- ThirdPerson
+- Isometry
+- TDSTK
+- Endless
+- ScoreAttack
+- Collectible
+- BonusItem
+timeCreated: 1444670253
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
