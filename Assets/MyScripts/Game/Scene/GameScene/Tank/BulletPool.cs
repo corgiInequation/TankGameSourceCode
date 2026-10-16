@@ -153,10 +153,10 @@ public class BulletPool : MonoBehaviour
         }
         else
         {
-            bullet = null;
+            return null;
         }
-        bullet.SetActive(true);
         activeBullet.Add(bullet);
+        bullet.SetActive(true);
         return bullet.GetComponent<Bullet>();
     }
     public void ReturnBullet(Bullet bullet)
