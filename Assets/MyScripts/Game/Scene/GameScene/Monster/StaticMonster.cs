@@ -27,7 +27,9 @@ public class StaticMonster : TankBase
     {
         for(int i = 0; i < firePos.Length; i++)
         {
-            Bullet tBullet =  BulletPool.Instance.UseBullet(bullet.gameObject.name, firePos[i]);
+            Bullet tBullet =  BulletPool.Instance.UseBullet(bullet.gameObject.name);
+            tBullet.gameObject.transform.position = firePos[i].position;
+            tBullet.gameObject.transform.rotation = firePos[i].rotation;
             tBullet.SetFather(this);
         }
     }

@@ -88,7 +88,7 @@ public class BulletPool : MonoBehaviour
         // print("here3");
         return bullet;
     }
-    public Bullet UseBullet(string name, Transform transform)
+    public Bullet UseBullet(string name)
     {
         GameObject bullet;
         if(name == "Bullet1")
@@ -96,12 +96,10 @@ public class BulletPool : MonoBehaviour
             if(bulletPool1.Count != 0)
             {
                 bullet = bulletPool1.Dequeue();
-                bullet.transform.position = transform.position;
-                bullet.transform.rotation = transform.rotation;
             }
             else
             {
-                bullet = Instantiate(bullet1, transform.position, transform.rotation);
+                bullet = Instantiate(bullet1);
                 bullet.transform.SetParent(this.transform);
                 bullet.name = name;
             }
@@ -112,11 +110,9 @@ public class BulletPool : MonoBehaviour
             if(bulletPool2.Count != 0)
             {
                 bullet = bulletPool2.Dequeue();
-                bullet.transform.position = transform.position;
-                bullet.transform.rotation = transform.rotation;
             }
             else {
-                bullet = Instantiate(bullet2, transform.position, transform.rotation);
+                bullet = Instantiate(bullet2);
                 bullet.name = name;
                 bullet.transform.SetParent(this.transform);
             }
@@ -127,14 +123,11 @@ public class BulletPool : MonoBehaviour
             if(bulletPool3.Count != 0)
             {
                 bullet = bulletPool3.Dequeue();
-                bullet.transform.position = transform.position;
-                bullet.transform.rotation = transform.rotation;
             }
             else {
-                bullet = Instantiate(bullet3, transform.position, transform.rotation);
+                bullet = Instantiate(bullet3);
                 bullet.name = name;
                 bullet.transform.SetParent(this.transform);
-                
             }
         }
         else if(name == "Bullet4")
@@ -142,11 +135,9 @@ public class BulletPool : MonoBehaviour
             if(bulletPool4.Count != 0)
             {
                 bullet = bulletPool4.Dequeue();
-                bullet.transform.position = transform.position;
-                bullet.transform.rotation = transform.rotation;
             }
             else {
-                bullet = Instantiate(bullet4, transform.position, transform.rotation);
+                bullet = Instantiate(bullet4);
                 bullet.name = name;
                 bullet.transform.SetParent(this.transform);
             }

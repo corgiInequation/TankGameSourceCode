@@ -97,7 +97,9 @@ public class DynamicEnemy : TankBase
 
     public override void Fire()
     {
-        Bullet tBullet =  BulletPool.Instance.UseBullet(bullet.gameObject.name, firePos);
+        Bullet tBullet =  BulletPool.Instance.UseBullet(bullet.gameObject.name);
+        tBullet.gameObject.transform.position = firePos.position;
+        tBullet.gameObject.transform.rotation = firePos.rotation; 
         tBullet.SetFather(this);
     }
     public override void Dead()
