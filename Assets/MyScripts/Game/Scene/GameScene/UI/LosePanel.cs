@@ -11,7 +11,11 @@ public class LosePanel : SceneBase<LosePanel>
     void Start()
     {
         againButton.btnEvents += () => SceneManager.LoadScene("GameScene");
+        againButton.btnEvents += () => BulletPool.Instance.ReturnAllActiveBullet();
         returnButton.btnEvents += () => SceneManager.LoadScene("BeginScene");
+        returnButton.btnEvents += () => BulletPool.Instance.ReturnAllActiveBullet();
+
+
         HideMe();
     }
     public override void ShowMe()

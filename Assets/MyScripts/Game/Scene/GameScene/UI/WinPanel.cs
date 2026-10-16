@@ -19,6 +19,7 @@ public class WinPanel : SceneBase<WinPanel>
         confirmButton.btnEvents += () =>
         {
             SceneManager.LoadScene("BeginScene");
+            BulletPool.Instance.ReturnAllActiveBullet();
         };
         HideMe();
         

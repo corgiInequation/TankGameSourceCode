@@ -11,10 +11,13 @@ public class BulletPool : MonoBehaviour
     // Start is called before the first frame update
     private static BulletPool instance;
     public static BulletPool Instance => instance;
+    public bool isInitted = false;
+    private List<GameObject> activatedBullets = new List<GameObject>();
     private Queue<GameObject> bulletPool1 = new Queue<GameObject>();
     private Queue<GameObject> bulletPool2 = new Queue<GameObject>();
     private Queue<GameObject> bulletPool3 = new Queue<GameObject>();
     private Queue<GameObject> bulletPool4 = new Queue<GameObject>();
+    private HashSet<GameObject> activeBullet = new HashSet<GameObject>();
 
 
     [SerializeField]
@@ -31,19 +34,21 @@ public class BulletPool : MonoBehaviour
 
     void Awake()
     {
-        if(instance == null)
+        //避免重复创建管理器，以及误删正常的管理器
+        //因为这个脚本对应的gameobject是不会随着场景变化删除的，所以每次到LoadingScene场景，都会多一个管理器，这个时候就需要把这个管理器销毁
+        if(instance != null && instance != this)
         {
-            instance = this;
+            Destroy(gameObject);
+            return;
         }
-        else
-        {
-            //BulletPool类似于一个管理器类，实例只能有一个
-            Destroy(this);
-        }
+        instance = this;
         DontDestroyOnLoad(this.gameObject);
     }
-
     void Start()
+    {
+        CreateBulletPool();
+    }
+    public void CreateBulletPool()
     {
         for(int i = 0; i < poolSize; i++)
         {
@@ -52,7 +57,7 @@ public class BulletPool : MonoBehaviour
             bulletPool3.Enqueue(CreateBullet("Bullet3"));
             bulletPool4.Enqueue(CreateBullet("Bullet4"));
         }
-        SceneManager.LoadScene("GameScene");
+        isInitted = true;
     }
     GameObject CreateBullet(string name)
     {
@@ -151,12 +156,20 @@ public class BulletPool : MonoBehaviour
             bullet = null;
         }
         bullet.SetActive(true);
+        activeBullet.Add(bullet);
         return bullet.GetComponent<Bullet>();
     }
     public void ReturnBullet(Bullet bullet)
     {
         GameObject bulletGameObject = bullet.gameObject;
+        if(!activeBullet.Remove(bulletGameObject))
+        {
+            return;
+        }
         bulletGameObject.SetActive(false);
+        //对于每个子弹，在回收的时候，需要对其复原，比如清空其fatherTank
+        bullet.fatherTank = null;
+        bullet.nowTime = 0;
         if(bulletGameObject.name == "Bullet1")
         {
             bulletPool1.Enqueue(bulletGameObject);
@@ -173,5 +186,15 @@ public class BulletPool : MonoBehaviour
         {
             bulletPool4.Enqueue(bulletGameObject);
         }
+        
+    }
+    //此外，还需要写一个整体回收函数，把当前所有活跃状态的Bullet全部回收，防止进入到下一个场景
+    public void ReturnAllActiveBullet()
+    {
+        List<GameObject> list = new List<GameObject>(activeBullet);
+        for(int i = 0; i < list.Count; i++)
+        {
+            ReturnBullet(list[i].GetComponent<Bullet>());
+        }   
     }
 }

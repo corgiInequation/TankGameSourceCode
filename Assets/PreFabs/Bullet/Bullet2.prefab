@@ -4904,7 +4904,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -4923,6 +4923,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fatherTank: {fileID: 0}
   destroyEff: {fileID: 121000, guid: 6d280e9afeb61084285e48e5c0179003, type: 3}
+  nowTime: 0
+  liveTime: 10
   moveSpeed: 40
 --- !u!1 &165696
 GameObject:

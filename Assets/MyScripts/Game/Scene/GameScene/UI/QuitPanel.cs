@@ -23,6 +23,7 @@ public class QuitPanel : SceneBase<QuitPanel>
         confirmBtn.btnEvents += () =>
         {
             SceneManager.LoadScene("BeginScene");
+            BulletPool.Instance.ReturnAllActiveBullet();
         };
         base.HideMe();
     }

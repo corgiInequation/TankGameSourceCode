@@ -7,8 +7,8 @@ public class Bullet : MonoBehaviour
 {
     public TankBase fatherTank;
     public GameObject destroyEff;
-    private float nowTime = 0;
-    private float liveTime = 10f;
+    public float nowTime = 0;
+    public float liveTime = 10f;
     public int moveSpeed;
     public void SetFather(TankBase fatherTank)
     {
