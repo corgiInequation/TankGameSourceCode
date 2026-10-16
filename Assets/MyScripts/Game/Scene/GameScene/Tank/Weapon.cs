@@ -17,7 +17,7 @@ public class Weapon : MonoBehaviour
     {
         for(int i = 0; i < bulletPos.Length; i++)
         {
-            Bullet tBullet =  Instantiate(bullet, bulletPos[i].position, bulletPos[i].rotation);
+            Bullet tBullet =  BulletPool.Instance.UseBullet(bullet.gameObject.name, bulletPos[i]);
             tBullet.SetFather(fatherTank);
         }
     }

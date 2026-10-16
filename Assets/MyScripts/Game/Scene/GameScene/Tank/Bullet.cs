@@ -33,6 +33,7 @@ public class Bullet : MonoBehaviour
             audio.mute = !DataMg.Instance.musicData.soundOpen;
             audio.volume = DataMg.Instance.musicData.soundSize;
             audio.Play();
+            BulletPool.Instance.ReturnBullet(this);
         }
     }
 }
