@@ -97,6 +97,7 @@ public class BulletPool : MonoBehaviour
             else
             {
                 bullet = Instantiate(bullet1, transform.position, transform.rotation);
+                bullet.transform.SetParent(this.transform);
                 bullet.name = name;
             }
                 
@@ -112,6 +113,7 @@ public class BulletPool : MonoBehaviour
             else {
                 bullet = Instantiate(bullet2, transform.position, transform.rotation);
                 bullet.name = name;
+                bullet.transform.SetParent(this.transform);
             }
             
         }
@@ -126,6 +128,8 @@ public class BulletPool : MonoBehaviour
             else {
                 bullet = Instantiate(bullet3, transform.position, transform.rotation);
                 bullet.name = name;
+                bullet.transform.SetParent(this.transform);
+                
             }
         }
         else if(name == "Bullet4")
@@ -139,6 +143,7 @@ public class BulletPool : MonoBehaviour
             else {
                 bullet = Instantiate(bullet4, transform.position, transform.rotation);
                 bullet.name = name;
+                bullet.transform.SetParent(this.transform);
             }
         }
         else

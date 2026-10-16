@@ -7,6 +7,8 @@ public class Bullet : MonoBehaviour
 {
     public TankBase fatherTank;
     public GameObject destroyEff;
+    private float nowTime = 0;
+    private float liveTime = 10f;
     public int moveSpeed;
     public void SetFather(TankBase fatherTank)
     {
@@ -17,6 +19,11 @@ public class Bullet : MonoBehaviour
     void Update()
     {
         transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
+        nowTime += Time.deltaTime;
+        if(nowTime > liveTime)
+        {
+            BulletPool.Instance.ReturnBullet(this);
+        }
     }
     private void OnTriggerEnter(Collider other)
     {
