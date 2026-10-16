@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BulletPool : MonoBehaviour
 {
@@ -30,12 +31,20 @@ public class BulletPool : MonoBehaviour
 
     void Awake()
     {
-        instance = this;
+        if(instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            //BulletPool类似于一个管理器类，实例只能有一个
+            Destroy(this);
+        }
+        DontDestroyOnLoad(this.gameObject);
     }
 
     void Start()
     {
-
         for(int i = 0; i < poolSize; i++)
         {
             bulletPool1.Enqueue(CreateBullet("Bullet1"));
@@ -43,34 +52,35 @@ public class BulletPool : MonoBehaviour
             bulletPool3.Enqueue(CreateBullet("Bullet3"));
             bulletPool4.Enqueue(CreateBullet("Bullet4"));
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        SceneManager.LoadScene("GameScene");
     }
     GameObject CreateBullet(string name)
     {
         GameObject bullet;
-        print(name);
         if(name == "Bullet1")
         {
-            print("here1");
-            print(bullet1);
-            bullet = Instantiate(bullet1);
-            print("here2");
+            bullet = Instantiate(bullet1, this.transform);
+            bullet.name = name;
         }
         else if(name == "Bullet2")
-            bullet = Instantiate(bullet2);
+        {
+            bullet = Instantiate(bullet2, this.transform);
+            bullet.name = name;
+        }
         else if(name == "Bullet3")
-            bullet = Instantiate(bullet3);
+        {
+            bullet = Instantiate(bullet3, this.transform);
+            bullet.name = name;
+        }
         else if(name == "Bullet4")
-            bullet = Instantiate(bullet4);
+        {
+            bullet = Instantiate(bullet4, this.transform);
+            bullet.name = name;
+        }
         else
             bullet = null;
         bullet.SetActive(false);
-        print("here3");
+        // print("here3");
         return bullet;
     }
     public Bullet UseBullet(string name, Transform transform)
@@ -85,7 +95,11 @@ public class BulletPool : MonoBehaviour
                 bullet.transform.rotation = transform.rotation;
             }
             else
+            {
                 bullet = Instantiate(bullet1, transform.position, transform.rotation);
+                bullet.name = name;
+            }
+                
         }
         else if(name == "Bullet2")
         {
@@ -95,8 +109,11 @@ public class BulletPool : MonoBehaviour
                 bullet.transform.position = transform.position;
                 bullet.transform.rotation = transform.rotation;
             }
-            else
+            else {
                 bullet = Instantiate(bullet2, transform.position, transform.rotation);
+                bullet.name = name;
+            }
+            
         }
         else if(name == "Bullet3")
         {
@@ -106,8 +123,10 @@ public class BulletPool : MonoBehaviour
                 bullet.transform.position = transform.position;
                 bullet.transform.rotation = transform.rotation;
             }
-            else
+            else {
                 bullet = Instantiate(bullet3, transform.position, transform.rotation);
+                bullet.name = name;
+            }
         }
         else if(name == "Bullet4")
         {
@@ -117,8 +136,10 @@ public class BulletPool : MonoBehaviour
                 bullet.transform.position = transform.position;
                 bullet.transform.rotation = transform.rotation;
             }
-            else
+            else {
                 bullet = Instantiate(bullet4, transform.position, transform.rotation);
+                bullet.name = name;
+            }
         }
         else
         {

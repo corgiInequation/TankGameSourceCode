@@ -12,7 +12,7 @@ public class BeginScene : SceneBase<BeginScene>
 
     private void Start()
     {
-        beginBtn.btnEvents += () => { SceneManager.LoadScene("GameScene"); };
+        beginBtn.btnEvents += () => { SceneManager.LoadScene("LoadScene"); };
         settingBtn.btnEvents += () => { HideMe(); SettingsScene.Instance.ShowMe(); };
         exitBtn.btnEvents += () => { Application.Quit(); };
         rankBtn.btnEvents += () => { HideMe(); RankScene.Instance.ShowMe(); };

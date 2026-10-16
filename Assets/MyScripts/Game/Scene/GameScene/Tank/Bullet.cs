@@ -27,7 +27,6 @@ public class Bullet : MonoBehaviour
             {
                 other.GetComponent<TankBase>().Wound(fatherTank);
             }
-            Destroy(gameObject);
             GameObject eff = Instantiate(destroyEff, transform.position, transform.rotation);
             AudioSource audio = eff.GetComponent<AudioSource>();
             audio.mute = !DataMg.Instance.musicData.soundOpen;

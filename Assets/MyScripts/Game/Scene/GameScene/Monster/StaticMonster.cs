@@ -27,9 +27,8 @@ public class StaticMonster : TankBase
     {
         for(int i = 0; i < firePos.Length; i++)
         {
-            GameObject tBullet = Instantiate(bullet, firePos[i].position, firePos[i].rotation);
-            Bullet bulletInfo = tBullet.GetComponent<Bullet>();
-            bulletInfo.SetFather(this);
+            Bullet tBullet =  BulletPool.Instance.UseBullet(bullet.gameObject.name, firePos[i]);
+            tBullet.SetFather(this);
         }
     }
     public override void Wound(TankBase other)

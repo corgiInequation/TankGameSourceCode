@@ -57,12 +57,12 @@ public class DynamicEnemy : TankBase
         if (showTime >= 0)
         {
             showTime -= Time.deltaTime;
-            //Ê×ÏÈ£¬»ñÈ¡µ±Ç°Ì¹¿ËÎ»ÖÃ
-            //Ö®ºó£¬½«Ì¹¿ËÎ»ÖÃ×ª»»ÎªÆÁÄ»Î»ÖÃ
+            //ï¿½ï¿½ï¿½È£ï¿½ï¿½ï¿½È¡ï¿½ï¿½Ç°Ì¹ï¿½ï¿½Î»ï¿½ï¿½
+            //Ö®ï¿½ó£¬½ï¿½Ì¹ï¿½ï¿½Î»ï¿½ï¿½×ªï¿½ï¿½Îªï¿½ï¿½Ä»Î»ï¿½ï¿½
             Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
-            //Ö®ºó£¬½«ÆÁÄ»×ø±ê×ª»»ÎªGUIµÄ×ø±ê
+            //Ö®ï¿½ó£¬½ï¿½ï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ÎªGUIï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             screenPos.y = Screen.height - screenPos.y;
-            //Ö®ºó£¬»ñÈ¡GUI×ø±êºó£¬»­¼´¿É
+            //Ö®ï¿½ó£¬»ï¿½È¡GUIï¿½ï¿½ï¿½ï¿½ó£¬»ï¿½ï¿½ï¿½ï¿½ï¿½
             screenPos.x -= 50;
             screenPos.y -= 80;
             hpBgTexRect.x = screenPos.x;
@@ -97,9 +97,8 @@ public class DynamicEnemy : TankBase
 
     public override void Fire()
     {
-        GameObject tBullet = Instantiate(bullet, firePos.position, firePos.rotation);
-        Bullet bulletctr = tBullet.GetComponent<Bullet>();
-        bulletctr.SetFather(this);
+        Bullet tBullet =  BulletPool.Instance.UseBullet(bullet.gameObject.name, firePos);
+        tBullet.SetFather(this);
     }
     public override void Dead()
     {
