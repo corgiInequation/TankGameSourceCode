@@ -28,9 +28,9 @@ public abstract class TankBase : MonoBehaviour
             audioSource.Play();
         }
     }
-    public virtual void Wound(TankBase other)
+    public virtual void Wound(int attack)
     {
-        int damage = other.attack - this.defence;
+        int damage = attack - this.defence;
         if (damage <= 0)
             return;
         nowHp -= damage;

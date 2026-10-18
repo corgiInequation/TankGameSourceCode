@@ -159,7 +159,6 @@ public class BulletPool : MonoBehaviour
         }
         bulletGameObject.SetActive(false);
         //对于每个子弹，在回收的时候，需要对其复原，比如清空其fatherTank
-        bullet.fatherTank = null;
         bullet.nowTime = 0;
         if(bulletGameObject.name == "Bullet1")
         {

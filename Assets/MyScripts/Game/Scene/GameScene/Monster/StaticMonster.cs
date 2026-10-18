@@ -33,7 +33,7 @@ public class StaticMonster : TankBase
             tBullet.SetFather(this);
         }
     }
-    public override void Wound(TankBase other)
+    public override void Wound(int attack)
     {
         
     }

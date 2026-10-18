@@ -107,9 +107,9 @@ public class DynamicEnemy : TankBase
         base.Dead();
         GamePanel.Instance.AddScore(10);
     }
-    public override void Wound(TankBase other)
+    public override void Wound(int attack)
     {
-        base.Wound(other);
+        base.Wound(attack);
         showTime = 3;
     }
     

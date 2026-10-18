@@ -54,9 +54,9 @@ public class PlayerTank : TankBase
         Time.timeScale = 0;
         LosePanel.Instance.ShowMe();
     }
-    public override void Wound(TankBase other)
+    public override void Wound(int attack)
     {
-        base.Wound(other);
+        base.Wound(attack);
         GamePanel.Instance.UpdateHp(maxHp, nowHp);
     }
     public void ChangeWeapon(GameObject newWeapon)
